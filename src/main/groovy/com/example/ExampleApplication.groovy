@@ -1,23 +1,28 @@
 package com.example
 
-import io.micronaut.spring.beans.MicronautBeanProcessor;
+import io.micronaut.spring.beans.MicronautBeanProcessor
+import jakarta.inject.Singleton
 
-import jakarta.inject.Singleton;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.annotation.Bean
 
 @SpringBootApplication
-public class ExampleApplication {
+class ExampleApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ExampleApplication.class, args);
+    static void main(String[] args) {
+        SpringApplication.run(ExampleApplication.class, args)
+
+//        SpringApplicationBuilder builder = new SpringApplicationBuilder();
+//        MicronautApplicationContext context = new MicronautApplicationContext();
+//        context.start();
+//        builder.parent(context);
+//        builder.sources(ExampleApplication);
+//        builder.build().run();
     }
 
     @Bean
-    public MicronautBeanProcessor micronautBeanProcessor() {
-        return new MicronautBeanProcessor(Singleton.class);
+    MicronautBeanProcessor micronautBeanProcessor() {
+        return new MicronautBeanProcessor(Singleton.class)
     }
-
 }

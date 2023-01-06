@@ -1,67 +1,51 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
+plugins {
+    id("groovy")
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("io.micronaut.minimal.application") version "3.6.7"
+}
+
+version = "0.1"
+group = "com.example"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor "io.micronaut.spring:micronaut-spring-annotation"
+
+    implementation 'io.micronaut.spring:micronaut-spring'
+    implementation 'io.micronaut.spring:micronaut-spring-boot'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation files('lib/micronaut-lib-0.1.jar')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.6'
+    testImplementation 'org.spockframework:spock-spring:2.2-groovy-3.0'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.0')
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
     }
 }
 
-plugins {
-    id 'java'
-    id 'groovy'
-    id 'org.springframework.boot' version '2.7.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+application {
+    mainClass.set("com.example.ExampleApplication")
 }
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
-dependencies {
-    annotationProcessor "io.micronaut.spring:micronaut-spring-annotation:4.3.1"
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    implementation('org.codehaus.groovy:groovy:3.0.13')
-    implementation('org.codehaus.groovy:groovy-all:3.0.13')
-    implementation('org.codehaus.groovy:groovy-sql:3.0.13')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.example:micronaut-lib:0.1'
-    implementation 'io.micronaut.spring:micronaut-spring:4.3.1'
-    implementation 'io.micronaut.spring:micronaut-spring-boot:4.3.1'
-    implementation 'jakarta.annotation:jakarta.annotation-api'
-
-    compileOnly "io.micronaut:micronaut-inject"
-
-    testImplementation platform('org.spockframework:spock-bom:2.1-groovy-3.0')
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
-    testImplementation 'org.spockframework:spock-spring:2.2-groovy-3.0'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.9.0')
-}
-
-dependencyManagement {
-    imports {
-        mavenBom 'io.micronaut:micronaut-bom:3.7.1'
-    }
-}
-
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
+micronaut {
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
     }
 }
