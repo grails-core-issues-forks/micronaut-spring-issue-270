@@ -1,5 +1,6 @@
 package com.example
 
+import io.micronaut.core.cli.CommandLine
 import io.micronaut.spring.beans.MicronautBeanProcessor
 import jakarta.inject.Singleton
 
@@ -21,8 +22,8 @@ class ExampleApplication {
 //        builder.build().run();
     }
 
-    @Bean
-    MicronautBeanProcessor micronautBeanProcessor() {
-        return new MicronautBeanProcessor(Singleton.class)
-    }
+//    @Bean
+//    MicronautBeanProcessor micronautBeanProcessor() {
+//        return new MicronautBeanProcessor(Singleton.class, CommandLine.class)
+//    }
 }

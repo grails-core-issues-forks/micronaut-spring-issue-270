@@ -12,17 +12,21 @@ repositories {
 }
 
 dependencies {
+    implementation platform("io.micronaut:micronaut-bom:3.6.0")
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+
     annotationProcessor "io.micronaut.spring:micronaut-spring-annotation"
 
+    implementation("io.micronaut.spring:micronaut-spring-boot-starter")
     implementation 'io.micronaut.spring:micronaut-spring'
-    implementation 'io.micronaut.spring:micronaut-spring-boot'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    implementation files('lib/micronaut-lib-0.1.jar')
+    implementation files('lib/micronaut-lib-0.1.1.jar')
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.6'
+    testRuntimeOnly('io.micronaut:micronaut-core')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.10'
     testImplementation 'org.spockframework:spock-spring:2.2-groovy-3.0'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.9.0')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
 }
 
 test {
