@@ -21,7 +21,7 @@ dependencies {
     implementation 'io.micronaut.spring:micronaut-spring'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    implementation files('lib/micronaut-lib-0.1.1.jar')
+    implementation files('lib/micronaut-lib-0.1.jar')
 
     testRuntimeOnly('io.micronaut:micronaut-core')
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.10'
